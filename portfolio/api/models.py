@@ -8,31 +8,41 @@ class Education(models.Model):
     date_completed = models.DateField(default=date.today)
     program = models.CharField(max_length=200)
     description = models.TextField(max_length=200, blank=True)
-    degree = models.CharField() 
+    degree = models.CharField(blank=True) 
 
     def __str__(self):
         return self.institution
     
 class Skill(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     logo = models.ImageField(upload_to='skills/', blank=True, null=True)
+    icon_name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.nameß
+        return self.name
 
 class Experience(models.Model):
     company_name = models.CharField(max_length=60)
     role = models.CharField(max_length=60)
-    description = models.TextField(max_length=200)
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)
     skills = models.ManyToManyField(Skill, related_name="experiences", blank=True)
+    location = models.CharField(blank=True, null=True)
 
     def __str__(self):
         return self.company_name
+    
+class ExperienceDescription(models.Model):
+    experience = models.ForeignKey(Experience, on_delete=models.CASCADE, related_name='descriptions')
+    content = models.CharField(max_length=255)
+
+    def __str__(self):
+        experience_name = self.experience.company_name
+        content_preview = self.content[:50] + ("..." if len(self.content) > 50 else "")
+        return f"{experience_name} — {content_preview}"
 
 class Project(models.Model):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=50)
     description = models.TextField(max_length=200)
     skills = models.ManyToManyField(Skill, related_name="projects")
     image = models.ImageField(upload_to='projects/', blank=True, null=True)
