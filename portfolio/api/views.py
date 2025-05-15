@@ -1,8 +1,18 @@
 from .models import Education, Experience, Project, ExperienceDescription, Skill, ContactForm
 from .serializers import EducationSerializer, ExperienceSerializer, ProjectSerializer, ExperienceDescriptionSerializer, SkillSerializer, ContactFormSerializer
 from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from cloudinary.uploader import upload
 
 # Create your views here.
+@api_view(['GET'])
+def cloudinary_test(request):
+    result = upload("https://gratisography.com/wp-content/uploads/2025/01/gratisography-dog-vacation-800x525.jpg")
+    return Response({
+        "url": result['secure_url']
+    })
+
 #create list update delete
 class EducationList(generics.ListCreateAPIView):
     queryset = Education.objects.all()

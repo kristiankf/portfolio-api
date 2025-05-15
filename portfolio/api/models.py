@@ -1,5 +1,6 @@
 from datetime import date
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Education(models.Model):
@@ -15,7 +16,7 @@ class Education(models.Model):
     
 class Skill(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    logo = models.ImageField(upload_to='skills/', blank=True, null=True)
+    logo = CloudinaryField('image', blank=True, null=True)
     icon_name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -45,7 +46,7 @@ class Project(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=200)
     skills = models.ManyToManyField(Skill, related_name="projects")
-    image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
     github_link = models.URLField(blank=True, null=True)
     live_link = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(blank=True, null=True)

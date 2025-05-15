@@ -14,16 +14,18 @@ urlpatterns = [
     path('experience-description/<int:pk>/', views.ExperienceDescriptionDetail.as_view(), name='experience_description_detail'),
 
     # project endpoints
-    path('project/', views.ProjectList.as_view(), name='project'),
-    path('project/<int:pk>/', views.ProjectDetail.as_view(), name='project_detail'),
+    path('projects/', views.ProjectList.as_view(), name='project'),
+    path('projects/<int:pk>/', views.ProjectDetail.as_view(), name='project_detail'),
 
     # skills endpoints
-    path('skill/', views.SkillList.as_view(), name='skill'),
-    path('skill/<int:pk>/', views.SkillDetail.as_view(), name='skill_detail'),
+    path('skills/', views.SkillList.as_view(), name='skill'),
+    path('skills/<int:pk>/', views.SkillDetail.as_view(), name='skill_detail'),
 
     # contact endpoints
     path('contact/', views.ContactFormList.as_view(), name='contact'),
     path('contact/<int:pk>/', views.ContactFormDetail.as_view(), name='contact_detail'),
+
+    path('test-cloudinary/', views.cloudinary_test),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
