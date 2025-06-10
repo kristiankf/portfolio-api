@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+# django dababase url import
+import dj_database_url
+
 #cloudinary imports
 import cloudinary
 import cloudinary.uploader
@@ -30,12 +33,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-84!grm-nt6j(ds2gncp7+eu)tvqfije+1fgtgc3&551nxi8@d#'
+# SECRET_KEY = 'django-insecure-84!grm-nt6j(ds2gncp7+eu)tvqfije+1fgtgc3&551nxi8@d#'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -96,6 +100,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES['default'] = dj_database_url.parse("postgresql://portforlio_api_db_user:VhLh8p9BqjtHf9wLyneJSznhn3EVovdU@dpg-d0ji8radbo4c73dfhqrg-a.oregon-postgres.render.com/portforlio_api_db")
+
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.config(default=database_url, conn_max_age=600,
+    conn_health_checks=True,
+)
 
 
 # Password validation
