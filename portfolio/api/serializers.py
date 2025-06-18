@@ -59,7 +59,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Experience
-        fields = ["id", "company_name", "role", "start_date", "end_date", "skills", "descriptions", "projects", "location"]
+        fields = ["id", "company_name", "role", "start_date", "end_date", "skills", "descriptions", "projects", "location", "link"]
 
 class ContactFormSerializer(serializers.ModelSerializer):
     class Meta:

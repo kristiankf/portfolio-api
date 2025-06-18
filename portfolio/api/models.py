@@ -29,6 +29,7 @@ class Experience(models.Model):
     end_date = models.DateField(blank=True, null=True)
     skills = models.ManyToManyField(Skill, related_name="experiences", blank=True)
     location = models.CharField(blank=True, null=True)
+    link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.company_name
