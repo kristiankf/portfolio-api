@@ -1,8 +1,13 @@
 from django.urls import path
+from django.http import JsonResponse
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
+def ping(request):
+    return JsonResponse({"status": "ok"})
+
 urlpatterns = [
+    path('ping/', ping),
     # education endpoints
     path('education/', views.EducationList.as_view(), name='education'),
     path('education/<int:pk>/', views.EducationDetail.as_view(), name='education_detail'),
