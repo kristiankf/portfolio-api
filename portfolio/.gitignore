@@ -12,7 +12,7 @@ __pycache__/
 db.sqlite3
 db.sqlite3-journal
 
-# Media/uploads (optional, only if you don’t want to commit uploaded files)
+# Media/uploads (optional, only if you don't want to commit uploaded files)
 media/
 
 # Static files (collected)
@@ -27,6 +27,7 @@ env/
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # VS Code / JetBrains IDEs / etc.
 .vscode/
