@@ -8,3 +8,12 @@ admin.site.register(ExperienceDescription)
 admin.site.register(Education)
 admin.site.register(Project)
 admin.site.register(ContactForm)
+
+class ExperienceDescriptionInline(admin.TabularInline):
+    model = ExperienceDescription
+    extra = 1
+    verbose_name = "Experience Description"
+    verbose_name_plural = "Experience Descriptions"
+
+class ExperienceAdmin(admin.ModelAdmin):
+    inlines = [ExperienceDescriptionInline]
