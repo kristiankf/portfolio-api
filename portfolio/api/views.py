@@ -23,7 +23,7 @@ class EducationDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EducationSerializer
 
 class ExperienceList(generics.ListCreateAPIView):
-    queryset = Experience.objects.all()
+    queryset = Experience.objects.all().order_by('-start_date')
     serializer_class = ExperienceSerializer
 
 class ExperienceDetail(generics.RetrieveUpdateDestroyAPIView):
